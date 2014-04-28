@@ -15,6 +15,7 @@ class CommandOnSave(sublime_plugin.EventListener):
                 if re.match(path, file) is not None and len(commands) > 0:
                     print("Command on Save:")
                     for command in commands:
+                        command = command.format(filename=file)
                         p = subprocess.Popen([command], shell=True, stdout=subprocess.PIPE)
                         out, err = p.communicate()
                         print (out.decode('utf-8'))

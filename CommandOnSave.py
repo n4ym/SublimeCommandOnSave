@@ -12,7 +12,7 @@ class CommandOnSave(sublime_plugin.EventListener):
         if not settings == None:
             for path in settings.keys():
                 commands = settings.get(path)
-                if file.startswith(path) and len(commands) > 0:
+                if re.match(path, file) is not None and len(commands) > 0:
                     print("Command on Save:")
                     for command in commands:
                         p = subprocess.Popen([command], shell=True, stdout=subprocess.PIPE)
